@@ -35,7 +35,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(EM304 EM304.c )
+add_executable(EM304 EM304.c initialise_functions.c)
 
 pico_set_program_name(EM304 "EM304")
 pico_set_program_version(EM304 "0.1")
@@ -46,7 +46,8 @@ pico_enable_stdio_usb(EM304 1)
 
 # Add the standard library to the build
 target_link_libraries(EM304
-        pico_stdlib)
+        pico_stdlib
+        )
 
 # Add the standard include files to the build
 target_include_directories(EM304 PRIVATE
@@ -61,6 +62,8 @@ target_link_libraries(EM304
         hardware_watchdog
         hardware_clocks
         pico_cyw43_arch_none
+        
+        initialise_functions
         )
 
 pico_add_extra_outputs(EM304)
