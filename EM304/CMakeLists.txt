@@ -62,8 +62,6 @@ target_link_libraries(EM304
         hardware_watchdog
         hardware_clocks
         pico_cyw43_arch_none
-        
-        initialise_functions
         )
 
 pico_add_extra_outputs(EM304)
