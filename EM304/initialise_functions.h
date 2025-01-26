@@ -11,3 +11,5 @@
 #define I2C_SCL 9
 
 void i2c_initialisation(i2c_inst_t *port,uint freq, int SDA_pin,int SCL_pin);
+
+uint8_t wifi_chip_initialisation(void);
