@@ -66,6 +66,7 @@ message(STATUS "Include directories: ${CMAKE_CURRENT_LIST_DIR}/btstackconfig")
 target_link_libraries(EM304 
         pico_stdlib
         pico_btstack_ble
+        pico_btstack_cyw43
         hardware_i2c
         hardware_interp
         hardware_timer
