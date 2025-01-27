@@ -64,6 +64,8 @@ message(STATUS "Include directories: ${CMAKE_CURRENT_LIST_DIR}/btstackconfig")
 
 # Add any user requested libraries
 target_link_libraries(EM304 
+        pico_stdlib
+        pico_btstack_ble
         hardware_i2c
         hardware_interp
         hardware_timer
@@ -72,6 +74,8 @@ target_link_libraries(EM304
         pico_cyw43_arch_none
         )
 
+target_compile_definitions(EM304 PRIVATE ENABLE_BLE)
+
 # BTstack Root
 set(BTSTACK_ROOT "C:/Users/fares/.pico-sdk/sdk/2.1.0/lib/btstack")
 
@@ -79,8 +83,9 @@ set(BTSTACK_ROOT "C:/Users/fares/.pico-sdk/sdk/2.1.0/lib/btstack")
 target_include_directories(EM304 PRIVATE
         ${BTSTACK_ROOT}/src
         ${BTSTACK_ROOT}/platform/embedded
+        ${BTSTACK_ROOT}/3rd-party/rijndael  # Added this line
+        ${BTSTACK_ROOT}/3rd-party/lc3-google/include  # Added this line
 )
-
 
 # BTstack source files
 file(GLOB BTSTACK_SRC "${BTSTACK_ROOT}/src/*.c")
@@ -88,6 +93,8 @@ file(GLOB BTSTACK_PLATFORM_SRC "${BTSTACK_ROOT}/platform/embedded/*.c")
 
 # Link BTstack library
 add_library(btstack STATIC ${BTSTACK_SRC} ${BTSTACK_PLATFORM_SRC})
+
+target_include_directories(btstack PRIVATE ${CMAKE_CURRENT_LIST_DIR}/btstackconfig)
 
 # Link BTstack with the executable
 target_link_libraries(EM304 btstack)
