@@ -7,6 +7,7 @@
 #include "hardware/clocks.h"
 #include "pico/cyw43_arch.h"
 #include "initialise_functions.h"
+#include "btstack.h"
 
 
 int main() {
